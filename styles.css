@@ -66,6 +66,11 @@ body {
     margin-bottom: 15px;
 }
 
+.name-fields {
+    display: flex;
+    gap: 10px;
+}
+
 .form-control {
     width: 100%;
     padding: 14px 16px;
@@ -107,6 +112,11 @@ body {
     padding: 10px 16px;
 }
 
+.btn-cancel {
+    background-color: #e4e6eb;
+    color: #4b4f56;
+}
+
 .btn-primary:hover {
     background-color: #166fe5;
 }
@@ -137,24 +147,6 @@ body {
     text-align: center;
     margin-bottom: 15px;
     font-size: 18px;
-}
-
-.tabs {
-    display: flex;
-    justify-content: center;
-    margin-bottom: 20px;
-}
-
-.tab {
-    padding: 10px 20px;
-    cursor: pointer;
-    border-bottom: 2px solid transparent;
-}
-
-.tab.active {
-    border-bottom: 2px solid #1877f2;
-    color: #1877f2;
-    font-weight: bold;
 }
 
 .form-container {
@@ -195,37 +187,46 @@ body {
     100% { transform: rotate(360deg); }
 }
 
-.create-page {
-    margin-top: 28px;
-    text-align: center;
+.dob-label, .gender-label {
+    font-size: 12px;
+    color: #606770;
+    display: block;
+    margin-bottom: 5px;
+}
+
+.gender-options {
+    display: flex;
+    gap: 10px;
+}
+
+.gender-option {
+    border: 1px solid #ccd0d5;
+    padding: 8px;
+    border-radius: 4px;
+    flex: 1;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.terms-text {
+    font-size: 11px;
+    color: #777;
+}
+
+.terms-text a {
+    color: #385898;
+}
+
+.recovery-text {
     font-size: 14px;
+    margin-bottom: 15px;
 }
 
-.create-page a {
-    color: #1c1e21;
-    font-weight: bold;
-    text-decoration: none;
-}
-
-.create-page a:hover {
-    text-decoration: underline;
-}
-
-@media (max-width: 900px) {
-    .main-content {
-        flex-direction: column;
-        text-align: center;
-    }
-    
-    .intro-text {
-        padding-left: 0;
-        margin-bottom: 30px;
-        margin-right: 0;
-    }
-    
-    .login-form {
-        margin-left: 0;
-    }
+.recovery-buttons {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
 }
 
 .language-bar {
@@ -245,4 +246,37 @@ body {
 
 .language-bar a:hover {
     text-decoration: underline;
+}
+
+.language-btn {
+    background: none;
+    border: 1px solid #ccd0d5;
+    padding: 3px 8px;
+    border-radius: 4px;
+    margin-left: 10px;
+    cursor: pointer;
+}
+
+@media (max-width: 900px) {
+    .main-content {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .intro-text {
+        padding-left: 0;
+        margin-bottom: 30px;
+        margin-right: 0;
+    }
+    
+    .login-form {
+        margin-left: 0;
+        width: 100%;
+        max-width: 396px;
+    }
+    
+    .name-fields {
+        flex-direction: column;
+        gap: 15px;
+    }
 }
